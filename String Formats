@@ -1,0 +1,72 @@
+%d, %D
+$d and %D represent a signed 32-bit Integer, that is an Int.
+
+In the most basic case we can use the initializer for String to format the Integer
+
+Interpolate with %d
+
+let basicNumber: Int = 42
+print (String(format: "%d", basicNumber)) // 42
+print (String(format: "Basic Number: %d", basicNumber)) // Basic Number: 42
+But we can do more with this initializer.
+
+Numbers before the decimal point
+
+let leadingZeros: Int = 5
+let leadingStr1 = String(format: “%03d”, leadingZeros) // 005
+let leadingStr2 = String(format: “%05d”, leadingZeros) // 00005
+Numbers after the decimal point
+
+let trailingZeros: Float = 7.9857
+let trailingStr1 = String(format: “%.2f”, trailingZeros) // 7.99
+let trailingStr2 = String(format: “%.4f”, trailingZeros) // 7.9857
+Convert from Integer to hex
+
+In C, %2X defines the field width — if the hex representation of the value consists of less than 2 digits a prefix will be appended and we are guarenteed to have a fieldwidth of 2.
+
+let hexNumber: Int = 1616
+let hexStr1 = String(format: “%2X”, hexNumber) // 650
+Interpolate with %f
+
+let doubleNumber: Double = 42.7
+print (String(format: “%.1f”, doubleNumber)) // 42.7
+print (String(format: “Double Number: %.1f”, doubleNumber)) // Double Number: 42.7
+where the 1 represent rounding to 1 decimal place. Want 3 to make three decimal places?
+
+let anotherDoubleNumber: Double = 12.345678
+print (String(format: “%.3f”, anotherDoubleNumber)) // 12.346
+print (String(format: “Double Number: %.3f”, anotherDoubleNumber)) // Double Number: 12.346
+%@
+A string as returned by descriptionWithLocale if available, if not the description.
+
+So this is a good one to think of as a String interpolation
+
+Interpolate with %@
+
+print (String(format: “Hello, %@.”, “World”)) // Hello, World
+%1…
+
+You can have multiple variables, and these are numbered in a fashion as follows:
+
+Interpolate with multiple parameters
+
+print (String(format: “99%% of the %@ is accurate”, “test”)) // 99% of the test is accurate
+But % is a reserved character?
+
+No problem! Escape it with %
+
+print (String(format: “99%% of the %@ is accurate”, “test”)) //
+Less Common formatting
+%u, %U, %D
+
+Unsigned 32-bit Integer
+
+print (String(format: “%u…%u”, UInt32.min, UInt32.max)) // 0…4294967295
+%e
+
+64-bit floating-point number, printed in scientific notation
+
+print (String(format: “greatest %e”, Double.greatestFiniteMagnitude)) // greatest 1.797693e+308
+The issue
+In many cases the lowercase number above can be changed for an uppercase variant, leading to changes from lower to uppercase in the result.
+
